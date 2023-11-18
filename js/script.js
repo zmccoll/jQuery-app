@@ -1,23 +1,51 @@
-//creating new list item
-let li = $('<li></li>');
-let inputValue = $('#input').val();
-li.append(inputValue);
+function  newItem() {
+    //creating new list item
+    let li = $('<li></li>');
+    let inputValue = $('#input').val();
+    li.append(inputValue);
 
-if (inputValue === '') {
+    if (inputValue === '') {
    alert('you have to put something down!'); 
-} else {
+    } else {
     $('#list').append(li);
+    }
+
+    //crossing out an item from the list
+    function crossOut() {
+        li.toggleClass('strike')
+    }
+    
+    li.on('dblclick', function() {
+        li.toggleClass('strike');
+    })
+
+    //adding the delete button
+    let crossOutButton = $('<crossOutButton></crossOutButton>');
+    crossOutButton.append(document.createTextNode('X'));
+    li.append(crossOutButton);
+
+    crossOutButton.on('click', deleteListItem) ;
+    function deleteListItem() {
+        li.addClass('delete');
+    }    
+
+    //reordering the Items
+    $('#list').sortable();
+    
+    
+
 }
+
 
 //crossing something out
 /*function crossOut() {
     li.toggleClass('strike')
 }*/
-
+/*
 li.on('dblclick', function () {
     li.toggleClass('strike');
 });
-
+*/
 
 
 /*easy to show or hide elements w/ jQuery
